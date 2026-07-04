@@ -208,4 +208,3 @@ Um app nativo instalado fora da App Store com Apple ID gratuito **expira a cada 
 ---
 
 *Documento de planejamento baseado na versão de Julho/2026. Este README será atualizado conforme o projeto evolui.*
->>>>>>> efd0ff6deedb17be24d2dc7bb1d280a4ec03ddd7
