@@ -3,7 +3,7 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 }
 
 export function Button({ variant = "primary", className = "", children, ...props }: ButtonProps) {
-  const base = "w-full rounded-full py-3.5 text-p2 font-bold transition-colors disabled:opacity-50"
+  const base = "shadow-lg shadow-green/20 w-full rounded-full py-3.5 text-p2 font-bold transition-colors disabled:opacity-50"
   const variants = {
     primary: "bg-green text-neutral-100 hover:bg-green-400",
     secondary: "bg-neutral-100 text-neutral-800 hover:bg-neutral-300",
