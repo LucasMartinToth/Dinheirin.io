@@ -2,8 +2,12 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { createClient } from "@/lib/supabase/client"
 import Link from "next/link"
+import { createClient } from "@/lib/supabase/client"
+import { Logo } from "@/components/ui/Logo"
+import { Heading } from "@/components/ui/Heading"
+import { TextField } from "@/components/ui/TextField"
+import { Button } from "@/components/ui/Button"
 
 export default function LoginPage() {
   const [email, setEmail] = useState("")
@@ -18,59 +22,47 @@ export default function LoginPage() {
     setError(null)
     setLoading(true)
 
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    })
+    const { error } = await supabase.auth.signInWithPassword({ email, password })
 
     setLoading(false)
-
     if (error) {
       setError(error.message)
       return
     }
-
     router.push("/teste")
     router.refresh()
   }
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="w-full max-w-sm space-y-6">
-        <h1 className="text-2xl font-bold text-center">Entrar</h1>
+      <div className="w-full max-w-sm space-y-8">
+        <Logo />
+
+        <div className="space-y-1">
+          <Heading as="h2">Bem-vindo de volta</Heading>
+          <p className="text-p1 text-neutral-500">Entre com seus dados para continuar</p>
+        </div>
 
         <form onSubmit={handleLogin} className="space-y-4">
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            className="w-full border rounded-lg p-3"
-          />
-          <input
-            type="password"
-            placeholder="Senha"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            className="w-full border rounded-lg p-3"
-          />
+          <TextField label="Endereço de email" type="email" value={email} onChange={setEmail} placeholder="lucas@gmail.com" required />
+          <TextField label="Senha" type="password" value={password} onChange={setPassword} placeholder="••••••••••••" required />
 
-          {error && <p className="text-red-600 text-sm">{error}</p>}
+          <div className="text-right">
+            <Link href="/recuperar-senha" className="text-label text-neutral-400">
+              Esqueceu sua senha?
+            </Link>
+          </div>
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-black text-white rounded-lg p-3 disabled:opacity-50"
-          >
-            {loading ? "Entrando..." : "Entrar"}
-          </button>
+          {error && <p className="text-p1 text-red">{error}</p>}
+
+          <Button type="submit" disabled={loading}>
+            {loading ? "Entrando..." : "Login →"}
+          </Button>
         </form>
 
-        <p className="text-center text-sm">
-          Não tem conta?{" "}
-          <Link href="/cadastro" className="underline">
+        <p className="text-center text-p1 text-neutral-500">
+          Ainda não tem conta?{" "}
+          <Link href="/cadastro" className="text-green font-bold">
             Cadastre-se
           </Link>
         </p>

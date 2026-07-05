@@ -1,12 +1,17 @@
 "use client"
 
 import { useState } from "react"
-import { createClient } from "@/lib/supabase/client"
 import Link from "next/link"
+import Image from "next/image"
+import { createClient } from "@/lib/supabase/client"
+import { Heading } from "@/components/ui/Heading"
+import { TextField } from "@/components/ui/TextField"
+import { Button } from "@/components/ui/Button"
 
 export default function CadastroPage() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -15,27 +20,27 @@ export default function CadastroPage() {
   async function handleSignup(e: React.FormEvent) {
     e.preventDefault()
     setError(null)
+
+    if (password !== confirmPassword) {
+      setError("As senhas não coincidem")
+      return
+    }
+
     setLoading(true)
-
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-    })
-
+    const { error } = await supabase.auth.signUp({ email, password })
     setLoading(false)
 
     if (error) {
       setError(error.message)
       return
     }
-
     setSuccess(true)
   }
 
   if (success) {
     return (
       <div className="min-h-screen flex items-center justify-center p-4">
-        <p className="text-center max-w-sm">
+        <p className="text-center max-w-sm text-p2 text-neutral-100">
           Conta criada! Verifique seu email para confirmar antes de entrar.
         </p>
       </div>
@@ -44,45 +49,38 @@ export default function CadastroPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="w-full max-w-sm space-y-6">
-        <h1 className="text-2xl font-bold text-center">Criar conta</h1>
+      <div className="w-full max-w-sm rounded-3xl overflow-hidden bg-neutral-800">
+        <div className="relative h-40">
+          <Image src="/cadastro-hero.png" alt="" fill className="object-cover" />
+        </div>
 
-        <form onSubmit={handleSignup} className="space-y-4">
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            className="w-full border rounded-lg p-3"
-          />
-          <input
-            type="password"
-            placeholder="Senha"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            minLength={6}
-            className="w-full border rounded-lg p-3"
-          />
+        <div className="p-6 space-y-6">
+          <div className="space-y-1 text-center">
+            <Heading as="h2">Cadastro</Heading>
+            <p className="text-p1 text-neutral-500">
+              Crie sua conta e comece a cuidar melhor de seu dinheir.io
+            </p>
+          </div>
 
-          {error && <p className="text-red-600 text-sm">{error}</p>}
+          <form onSubmit={handleSignup} className="space-y-4">
+            <TextField label="Endereço de email" type="email" value={email} onChange={setEmail} placeholder="lucas@gmail.com" required />
+            <TextField label="Senha" type="password" value={password} onChange={setPassword} placeholder="••••••••••••" required />
+            <TextField label="Confirmar Senha" type="password" value={confirmPassword} onChange={setConfirmPassword} placeholder="••••••••••••" required />
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-black text-white rounded-lg p-3 disabled:opacity-50"
-          >
-            {loading ? "Criando..." : "Criar conta"}
-          </button>
-        </form>
+            {error && <p className="text-p1 text-red">{error}</p>}
 
-        <p className="text-center text-sm">
-          Já tem conta?{" "}
-          <Link href="/login" className="underline">
-            Entrar
-          </Link>
-        </p>
+            <Button type="submit" disabled={loading}>
+              {loading ? "Criando..." : "Criar Conta →"}
+            </Button>
+          </form>
+
+          <p className="text-center text-p1 text-neutral-500">
+            Já tem conta?{" "}
+            <Link href="/login" className="text-green font-bold">
+              Faça login
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   )

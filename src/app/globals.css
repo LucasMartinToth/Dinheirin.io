@@ -1,26 +1,63 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* Cores */
+  --color-red: #FF383C;
+  --color-red-400: #FF6164;
+  --color-red-300: #FF8A8C;
+  --color-red-200: #FFB2B4;
+  --color-red-100: #FFDBDC;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-blue: #0088FF;
+  --color-blue-400: #299BFF;
+  --color-blue-300: #52AEFF;
+  --color-blue-200: #7AC1FF;
+  --color-blue-100: #A3D4FF;
+
+  --color-green: #34C759;
+  --color-green-400: #51D271;
+  --color-green-300: #71DA8C;
+  --color-green-200: #92E2A6;
+  --color-green-100: #B2EBC0;
+
+  --color-yellow: #FFCC00;
+  --color-yellow-400: #FFD429;
+  --color-yellow-300: #FFDC52;
+  --color-yellow-200: #FFE47A;
+  --color-yellow-100: #FFEDA3;
+
+  --color-neutral-800: #212122;
+  --color-neutral-700: #48484A;
+  --color-neutral-600: #717174;
+  --color-neutral-500: #9A9A9D;
+  --color-neutral-400: #C3C3C5;
+  --color-neutral-300: #EDEDED;
+  --color-neutral-200: #F5F5F5;
+  --color-neutral-100: #FFFFFF;
+
+  /* Fonte */
+  --font-sans: var(--font-inter);
+
+  /* Escala tipográfica (size/line-height) */
+  --text-h1: 40px;
+  --text-h1--line-height: 42px;
+  --text-h2: 34px;
+  --text-h2--line-height: 38px;
+  --text-h3: 30px;
+  --text-h3--line-height: 36px;
+  --text-h4: 24px;
+  --text-h4--line-height: 32px;
+  --text-h5: 20px;
+  --text-h5--line-height: 28px;
+  --text-p1: 14px;
+  --text-p1--line-height: 20px;
+  --text-p2: 16px;
+  --text-p2--line-height: 22px;
+  --text-label: 12px;
+  --text-label--line-height: 18px;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-neutral-800);
+  color: var(--color-neutral-100);
 }
