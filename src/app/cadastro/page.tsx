@@ -39,24 +39,32 @@ export default function CadastroPage() {
 
   if (success) {
     return (
-      <div className="min-h-screen flex items-center justify-center p-4">
+      <div className="min-h-screen flex flex-col items-center justify-center p-4 space-y-6">
         <p className="text-center max-w-sm text-p2 text-neutral-100">
           Conta criada! Verifique seu email para confirmar antes de entrar.
+        </p>
+
+        <p className="text-center text-p1 text-neutral-500">
+          <Link href="/login" className="text-green font-bold">
+            Voltar para o login
+          </Link>
         </p>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="w-full max-w-sm rounded-3xl overflow-hidden bg-neutral-800">
-        <div className="relative h-40">
-          <Image src="/cadastro-hero.png" alt="" fill className="object-cover" />
-        </div>
+    <div className="flex h-screen flex-col">
+      {/* imagem: sempre 1/3 da altura da tela */}
+      <div className="relative flex-[1] w-full">
+        <Image src="/cadastro-hero.png" alt="" fill className="object-cover" priority />
+      </div>
 
-        <div className="p-6 space-y-6">
-          <div className="space-y-1 text-center">
-            <Heading as="h2">Cadastro</Heading>
+      {/* card: sempre 2/3 da altura da tela, puxado pra cima */}
+      <div className="relative -mt-6 flex-[2] rounded-t-3xl bg-neutral-800 px-6 pt-6 pb-8 overflow-y-auto">
+        <div className="mx-auto w-full max-w-sm space-y-6">
+          <div className="pt-5 space-y-1 text-center">
+            <Heading as="h3">Cadastro</Heading>
             <p className="text-p1 text-neutral-500">
               Crie sua conta e comece a cuidar melhor de seu dinheir.io
             </p>
@@ -69,7 +77,7 @@ export default function CadastroPage() {
 
             {error && <p className="text-p1 text-red">{error}</p>}
 
-            <Button type="submit" disabled={loading}>
+            <Button className="mt-5" type="submit" disabled={loading}>
               {loading ? "Criando..." : "Criar Conta →"}
             </Button>
           </form>

@@ -34,35 +34,35 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="w-full max-w-sm space-y-8">
+    <div className="min-h-screen flex items-center justify-center p-6">
+      <div className="w-full max-w-sm space-y-5">
         <Logo />
 
         <div className="space-y-1">
-          <Heading as="h2">Bem-vindo de volta</Heading>
-          <p className="text-p1 text-neutral-500">Entre com seus dados para continuar</p>
+          <Heading as="h3">Bem-vindo de volta</Heading>
+          <p className="text-p1 text-neutral-500 text-center">Entre com seus dados para continuar</p>
         </div>
 
-        <form onSubmit={handleLogin} className="space-y-4">
+        <form onSubmit={handleLogin} className="space-y-3 pt-4">
           <TextField label="Endereço de email" type="email" value={email} onChange={setEmail} placeholder="lucas@gmail.com" required />
           <TextField label="Senha" type="password" value={password} onChange={setPassword} placeholder="••••••••••••" required />
 
-          <div className="text-right">
-            <Link href="/recuperar-senha" className="text-label text-neutral-400">
+          <div className="text-right -pt-1">
+            <Link href="/recuperar-senha" className="text-label text-neutral-500">
               Esqueceu sua senha?
             </Link>
           </div>
 
           {error && <p className="text-p1 text-red">{error}</p>}
 
-          <Button type="submit" disabled={loading}>
+          <Button className="mt-5" type="submit" disabled={loading}>
             {loading ? "Entrando..." : "Login →"}
           </Button>
         </form>
 
         <p className="text-center text-p1 text-neutral-500">
           Ainda não tem conta?{" "}
-          <Link href="/cadastro" className="text-green font-bold">
+          <Link href="/cadastro" className="text-green font-bold underline">
             Cadastre-se
           </Link>
         </p>

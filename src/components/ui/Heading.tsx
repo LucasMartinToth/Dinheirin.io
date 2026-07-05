@@ -11,7 +11,7 @@ const sizeMap = {
 export function Heading({ as = "h1", children, className = "" }: HeadingProps) {
   const Tag = as
   return (
-    <Tag className={`${sizeMap[as]} font-bold text-neutral-100 ${className}`}>
+    <Tag className={`${sizeMap[as]} font-bold text-neutral-100 text-center ${className}`}>
       {children}
     </Tag>
   )

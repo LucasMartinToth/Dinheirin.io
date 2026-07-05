@@ -29,7 +29,9 @@ export async function proxy(request: NextRequest) {
 
   // Rotas públicas: login e cadastro. Todo o resto exige login.
   const isPublicRoute = request.nextUrl.pathname.startsWith('/login') ||
-                        request.nextUrl.pathname.startsWith('/cadastro')
+                        request.nextUrl.pathname.startsWith('/cadastro') ||
+                        request.nextUrl.pathname.startsWith('/recuperar-senha') ||
+                        request.nextUrl.pathname.startsWith('/redefinir-senha')
 
   if (!user && !isPublicRoute) {
     const url = request.nextUrl.clone()

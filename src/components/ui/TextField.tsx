@@ -18,8 +18,8 @@ export function TextField({ label, type = "text", value, onChange, placeholder, 
   const inputType = isPassword ? (show ? "text" : "password") : type
 
   return (
-    <div className="space-y-1.5">
-      <label className="block text-label text-neutral-300">{label}</label>
+    <div className="space-y-1">
+      <label className="block text-label text-neutral-500">{label}</label>
       <div className="relative">
         <input
           type={inputType}
@@ -27,7 +27,7 @@ export function TextField({ label, type = "text", value, onChange, placeholder, 
           onChange={(e) => onChange(e.target.value)}
           placeholder={placeholder}
           required={required}
-          className="w-full rounded-2xl bg-neutral-100 px-4 py-3.5 text-p2 text-neutral-800 placeholder:text-neutral-500 outline-none focus:ring-2 focus:ring-green"
+          className="w-full rounded-full bg-neutral-100 px-4 py-3.5 text-p2 text-neutral-800 placeholder:text-neutral-400 outline-none focus:ring-2 focus:ring-green"
         />
         {isPassword && (
           <button
