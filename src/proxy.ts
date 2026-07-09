@@ -39,6 +39,23 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(url)
   }
 
+  // Usuário logado, mas ainda sem casa → força passar pelo onboarding
+  const isCasaRoute = request.nextUrl.pathname.startsWith('/casa')
+
+  if (user && !isPublicRoute && !isCasaRoute) {
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('household_id')
+      .eq('id', user.id)
+      .single()
+
+    if (!profile?.household_id) {
+      const url = request.nextUrl.clone()
+      url.pathname = '/casa'
+      return NextResponse.redirect(url)
+    }
+  }
+
   return supabaseResponse
 }
 
